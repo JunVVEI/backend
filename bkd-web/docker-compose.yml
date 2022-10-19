@@ -1,0 +1,13 @@
+version: '1'
+services:
+  bkd-app: # 服务名称
+    environment:
+      - VERSION=${BUILD_NUMBER}
+    container_name: bkd-web     # 容器名称
+    image: ${docker_url}        # 镜像版本
+    restart: always           # docker重启后，该容器也重启
+    volumes: # 目录挂载
+      - "/etc/localtime:/etc/localtime:ro" # (左为宿主，右为容器)
+    ports:
+      - "8080:8080"           # 端口映射(左为宿主，右为容器)
+    command: ["java", "-jar","/app.jar"]
